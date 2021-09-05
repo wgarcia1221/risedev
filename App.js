@@ -1,11 +1,19 @@
 import React from 'react'
-import TabNavigator from "./navigation/TabNavigator.js"
-//import Home from './screens/Home.js'
+import SwitchNavigator from "./navigation/SwitchNavigator.js"
+import {createStore, applyMiddleware} from 'redux'
+import reducer from './reducers'
+import {Provider} from 'react-redux'
+import {logger} from 'redux-logger'
+import {ThunkMiddleware} from 'redux-thunk'
+const middleWare = applyMiddleware(ThunkMiddleware, logger);
+const store = createStore(reducer);
 
 export default class App extends React.Component{
   render(){
     return(
-      <TabNavigator/>
+      <Provider store = {store}>
+      <SwitchNavigator/>
+      </Provider>
       );
   }
 }
